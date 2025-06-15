@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Sintomas e Chás Detalhada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark-color: #388E3C;
+            --light-bg: #e8f5e9;
+            --dark-text: #212121;
+            --light-gray: #f0f0f0;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --selected-glow: rgba(76, 175, 80, 0.4);
+            --info-bg: #e3f2fd;
+            --info-border: #90caf9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 30px;
+            box-sizing: border-box;
+            color: var(--dark-text);
+        }
+
+        .container {
+            background-color: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 45px;
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .symptom-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .symptom-button {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            border: none;
+            padding: 20px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .symptom-button:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .symptom-button.selected {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--selected-glow);
+            border: 2px solid var(--primary-dark-color);
+        }
+
+        .symptom-button.selected:hover {
+            background-color: var(--primary-dark-color);
+            box-shadow: 0 10px 25px var(--selected-glow);
+        }
+
+        #selected-symptoms-display {
+            margin-top: 30px;
+            font-size: 1.25em;
+            color: var(--dark-text);
+            min-height: 30px;
+            font-weight: 600;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        /* Seção de sugestões de chás */
+        #tea-suggestions-container {
+            background-color: var(--info-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            text-align: left;
+            margin-top: 30px;
+            animation: fadeIn 0.8s ease-out;
+            box-sizing: border-box;
+            border: 2px solid var(--info-border);
+            display: none;
+        }
+
+        #tea-suggestions-container.active {
+            display: block;
+        }
+
+        #tea-suggestions-container h2 {
+            color: var(--primary-dark-color);
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        #tea-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .symptom-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .tea-item {
+            background-color: var(--white);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+            color: var(--dark-text);
+            transition: transform 0.2s ease;
+        }
+
+        .tea-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .container, #tea-suggestions-container {
+                padding: 30px;
+                border-radius: 15px;
+            }
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 35px;
+            }
+            .symptom-buttons {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            .symptom-button {
+                padding: 15px 20px;
+                font-size: 1.1em;
+            }
+            #selected-symptoms-display {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+            #tea-suggestions-container h2 {
+                font-size: 1.8em;
+            }
+            .tea-item {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            .container, #tea-suggestions-container {
+                padding: 25px;
+                border-radius: 12px;
+            }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+            .symptom-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .symptom-button {
+                padding: 12px 18px;
+                font-size: 1em;
+            }
+            #selected-symptoms-display {
+                font-size: 1em;
+                padding: 12px;
+            }
+            #tea-suggestions-container h2 {
+                font-size: 1.5em;
+            }
+            .tea-item {
+                font-size: 0.95em;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Qual é o seu sintoma?</h1>
+        <div class="symptom-buttons">
+            <button class="symptom-button" data-symptom="Dor de cabeça">Dor de cabeça</button>
+            <button class="symptom-button" data-symptom="Febre">Febre</button>
+            <button class="symptom-button" data-symptom="Tosse">Tosse</button>
+            <button class="symptom-button" data-symptom="Dor de garganta">Dor de garganta</button>
+            <button class="symptom-button" data-symptom="Cansaço">Cansaço</button>
+            <button class="symptom-button" data-symptom="Náusea">Náusea</button>
+            <button class="symptom-button" data-symptom="Dor muscular">Dor muscular</button>
+            <button class="symptom-button" data-symptom="Congestão nasal">Congestão nasal</button>
+            <button class="symptom-button" data-symptom="Coriza">Coriza</button>
+            <button class="symptom-button" data-symptom="Perda de olfato">Perda de olfato</button>
+            <button class="symptom-button" data-symptom="Dificuldade de respirar">Dificuldade de respirar</button>
+            <button class="symptom-button" data-symptom="Manchas na pele">Manchas na pele</button>
+            <button class="symptom-button" data-symptom="Dor de barriga">Dor de barriga</button>
+            <button class="symptom-button" data-symptom="Vômito">Vômito</button>
+            <button class="symptom-button" data-symptom="Dor no peito">Dor no peito</button>
+            <button class="symptom-button" data-symptom="Falta de ar">Falta de ar</button>
+        </div>
+        <p id="selected-symptoms-display">Sintomas selecionados: Nenhum</p>
+    </div>
+
+    <div id="tea-suggestions-container">
+        <h2>Chás Recomendados para Seus Sintomas</h2>
+        <ul id="tea-list">
+            <li>Nenhum chá sugerido ainda. Selecione seus sintomas acima!</li>
+        </ul>
+    </div>
+
+    <script>
+        const symptomButtons = document.querySelectorAll('.symptom-button');
+        const selectedSymptomsDisplay = document.getElementById('selected-symptoms-display');
+        const teaSuggestionsContainer = document.getElementById('tea-suggestions-container');
+        const teaList = document.getElementById('tea-list');
+        let selectedSymptoms = new Set();
+
+        // Mapeamento de sintomas para chás
+        // Adicionando mais opções de chás para cada sintoma
+        const symptomToTeaMap = {
+            "Dor de cabeça": ["Camomila", "Gengibre", "Hortelã", "Passiflora", "Valeriana", "Erva-cidreira"],
+            "Febre": ["Limão com Mel", "Sabugueiro", "Hortelã", "Tília", "Gengibre"],
+            "Tosse": ["Gengibre com Limão", "Guaco", "Alcaçuz", "Tomilho", "Hortelã", "Malva"],
+            "Dor de garganta": ["Gengibre", "Malva", "Romã", "Sálvia", "Alcaçuz", "Própolis"],
+            "Cansaço": ["Alecrim", "Ginseng", "Chá Verde", "Ginkgo Biloba", "Guaraná (com moderação)"],
+            "Náusea": ["Gengibre", "Hortelã", "Camomila", "Funcho"],
+            "Dor muscular": ["Alecrim", "Gengibre", "Arnica", "Hortelã-pimenta (uso externo ou chá)"],
+            "Congestão nasal": ["Hortelã", "Gengibre", "Eucalipto (inalação)", "Sabugueiro", "Tomilho"],
+            "Coriza": ["Limão com Mel", "Gengibre", "Hortelã", "Sabugueiro"],
+            "Perda de olfato": ["Gengibre", "Hortelã (para estimular sentidos)"],
+            "Dificuldade de respirar": ["Hortelã", "Eucalipto (inalação)", "Malva", "Gengibre"],
+            "Manchas na pele": ["Camomila (compressas)", "Calêndula (compressas)", "Chá Verde (uso tópico)"],
+            "Dor de barriga": ["Camomila", "Hortelã", "Erva-doce", "Boldo", "Espinheira Santa"],
+            "Vômito": ["Gengibre", "Hortelã", "Camomila"],
+            "Dor no peito": ["Camomila (para ansiedade/calmante)", "Hortelã (para desconforto leve)", "Valeriana"], // Sempre importante procurar auxílio médico para dor no peito.
+            "Falta de ar": ["Hortelã (para desobstrução das vias aéreas)", "Gengibre"], // Cuidado: Sempre importante procurar auxílio médico para falta de ar.
+        };
+
+        symptomButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const symptom = button.dataset.symptom;
+
+                if (button.classList.contains('selected')) {
+                    button.classList.remove('selected');
+                    selectedSymptoms.delete(symptom);
+                } else {
+                    button.classList.add('selected');
+                    selectedSymptoms.add(symptom);
+                }
+                updateSelectedSymptomsDisplay();
+                updateTeaSuggestions();
+            });
+        });
+
+        function updateSelectedSymptomsDisplay() {
+            if (selectedSymptoms.size === 0) {
+                selectedSymptomsDisplay.textContent = 'Sintomas selecionados: Nenhum';
+            } else {
+                selectedSymptomsDisplay.textContent = 'Sintomas selecionados: ' + Array.from(selectedSymptoms).join(', ');
+            }
+        }
+
+       function updateTeaSuggestions() {
+            teaList.innerHTML = ''; // Limpa a lista anterior
+
+            if (selectedSymptoms.size === 0) {
+                teaList.innerHTML = '<li>Nenhum chá sugerido ainda. Selecione seus sintomas acima!</li>';
+                teaSuggestionsContainer.classList.remove('active');
+            } else {
+                selectedSymptoms.forEach(symptom => {
+                    if (symptomToTeaMap[symptom] && symptomToTeaMap[symptom].length > 0) {
+                        const symptomTitle = document.createElement('div');
+                        symptomTitle.classList.add('symptom-title');
+                        symptomTitle.textContent = symptom + ":";
+                        teaList.appendChild(symptomTitle);
+
+                        symptomToTeaMap[symptom].forEach(tea => {
+                            const teaItem = document.createElement('li');
+                            teaItem.classList.add('tea-item');
+                            teaItem.textContent = tea;
+                            teaList.appendChild(teaItem);
+                        });
+                    }
+                });
+
+                // Se nenhum chá foi sugerido para os sintomas selecionados (ex: sintoma novo sem chá mapeado)
+                if (teaList.children.length === 0) {
+                     teaList.innerHTML = '<li>Nenhum chá específico encontrado para esta combinação de sintomas.</li>';
+                }
+
+                teaSuggestionsContainer.classList.add('active');
+            }
+        }
+
+        // Inicializa a exibição de chás
+        updateTeaSuggestions();
+    </script>
+</body>
+</html>
