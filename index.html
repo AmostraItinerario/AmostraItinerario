@@ -12,6 +12,7 @@
       margin: 0;
       padding: 0;
       font-family: "Poppins", sans-serif;
+      position: relative;
     }
 
     header {
@@ -24,7 +25,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: auto;
     }
 
     .h1 {
@@ -96,13 +96,12 @@
     }
 
     .fundo {
-      position: relative;
+      position: absolute;
       z-index: 2;
       top: -1250px;
-      width: 1885px;
-      height: 940px;
+      width: 100%;
+      height: auto;
       display: block;
-      margin: 0 auto;
     }
 
     /* RESPONSIVO PARA CELULAR */
@@ -142,9 +141,9 @@
         margin: 0 auto;
       }
 
-      .fundo {
-        width: 100%;
-        height: auto;
+      /* troca o fundo para versão vertical */
+      #fundo-img {
+        content: url("fundo-vertical.png");
         top: -50px;
       }
     }
@@ -159,8 +158,9 @@
     <p>Faça já seu diagnóstico na melhor clínica do Integração!<br>Se diagnóstique!</p>
     <button class="botao" onclick="dig()">Diagnósticos</button>
     <img src="Medico-removebg-preview (2).png" alt="Médico" class="img">
-    <img src="Untitled design (5).png" alt="Fundo" class="fundo">
+    <img src="fundo-horizontal.png" alt="Fundo" class="fundo" id="fundo-img">
   </main>
+
   <script>
     function dig() {
       window.location.href = "dig.html";
