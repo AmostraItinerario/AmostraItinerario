@@ -96,12 +96,13 @@
     }
 
     .fundo {
-      position: absolute;
+      position: relative;
       z-index: 2;
       top: -1250px;
-      width: 100%;
-      height: auto;
+      width: 1885px;
+      height: 940px;
       display: block;
+      margin: 0 auto;
     }
 
     /* RESPONSIVO PARA CELULAR */
@@ -141,10 +142,16 @@
         margin: 0 auto;
       }
 
-      /* troca o fundo para versão vertical */
+      /* FUNDO ROTACIONADO NO CELULAR */
       #fundo-img {
-        content: url("fundo-vertical.png");
-        top: -50px;
+        transform: rotate(90deg);
+        transform-origin: center;
+        width: auto;
+        height: 100vh;
+        display: block;
+        margin: 0 auto;
+        top: 0;
+        position: relative;
       }
     }
   </style>
@@ -158,7 +165,7 @@
     <p>Faça já seu diagnóstico na melhor clínica do Integração!<br>Se diagnóstique!</p>
     <button class="botao" onclick="dig()">Diagnósticos</button>
     <img src="Medico-removebg-preview (2).png" alt="Médico" class="img">
-    <img src="fundo-horizontal.png" alt="Fundo" class="fundo" id="fundo-img">
+    <img src="Untitled design (5).png" alt="Fundo" class="fundo" id="fundo-img">
   </main>
 
   <script>
