@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnósticos</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@600&family=Rubik:wght@400;700&display=swap');
@@ -96,6 +96,7 @@
     }
 
     .fundo {
+      /* Para desktop, mantém posição relativa para layout normal */
       position: relative;
       z-index: 2;
       top: -1250px;
@@ -107,7 +108,11 @@
 
     /* RESPONSIVO PARA CELULAR */
     @media (max-width: 768px) {
-      .h1, .dig, .med, p, .botao {
+      .h1,
+      .dig,
+      .med,
+      p,
+      .botao {
         left: 0 !important;
         text-align: center;
       }
@@ -116,7 +121,8 @@
         font-size: 28px;
       }
 
-      .dig, .med {
+      .dig,
+      .med {
         font-size: 48px;
         top: 0;
       }
@@ -145,13 +151,14 @@
       /* FUNDO ROTACIONADO NO CELULAR */
       #fundo-img {
         transform: rotate(90deg);
-        transform-origin: center;
-        width: auto;
-        height: 100vh;
-        display: block;
-        margin: 0 auto;
-        top: 0;
-        position: relative;
+        transform-origin: center center;
+        width: 100vh; /* usa altura da tela para largura da imagem */
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1; /* deixa atrás dos elementos */
       }
     }
   </style>
@@ -162,10 +169,22 @@
     <h1 class="h1"><em>Smart Med</em></h1>
     <h2 class="dig"><em>Diagnóstico</em> </h2>
     <h2 class="med"><em>Médico</em></h2>
-    <p>Faça já seu diagnóstico na melhor clínica do Integração!<br>Se diagnóstique!</p>
+    <p>
+      Faça já seu diagnóstico na melhor clínica do Integração!<br />
+      Se diagnóstique!
+    </p>
     <button class="botao" onclick="dig()">Diagnósticos</button>
-    <img src="Medico-removebg-preview (2).png" alt="Médico" class="img">
-    <img src="Untitled design (5).png" alt="Fundo" class="fundo" id="fundo-img">
+    <img
+      src="Medico-removebg-preview (2).png"
+      alt="Médico"
+      class="img"
+    />
+    <img
+      src="Untitled design (5).png"
+      alt="Fundo"
+      class="fundo"
+      id="fundo-img"
+    />
   </main>
 
   <script>
