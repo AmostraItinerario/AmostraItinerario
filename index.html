@@ -1,150 +1,137 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnósticos</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Bangers&family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&family=Hammersmith+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    /* --- ESTILO PADRÃO PARA PC --- */
+    body {
+        overflow-x: hidden;
+        font-family: "Poppins", sans-serif;
+    }
 
-        body {
-            overflow-x: hidden;
-            font-family: "Poppins", sans-serif;
-        }
+    header {
+        position: relative;
+        z-index: 20;
+        background-color: #3F51B5;
+        padding: 25px;
+        border-radius: 10px;
+        top: -15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+    }
 
-        header {
-            position: relative;
-            z-index: 20;
-            background-color: #3F51B5;
-            padding: 25px;
-            border-radius: 10px;
+    .h1 {
+        position: relative;
+        z-index: 100;
+        font-family: "Poppins", sans-serif;
+        left: 200px;
+        color: rgb(18, 18, 95);
+    }
+
+    h2 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 80px;
+    }
+
+    .med {
+        position: relative;
+        z-index: 105;
+        top: -100px;
+        left: 200px;
+        font-family: "Rubik", sans-serif;
+        font-size: 100px;
+        color: rgb(18, 18, 95);
+    }
+
+    .dig {
+        position: relative;
+        z-index: 120;
+        left: 200px;
+        font-family: "Rubik", sans-serif;
+        font-size: 100px;
+    }
+
+    p {
+        position: relative;
+        z-index: 125;
+        margin-top: -190px;
+        font-family: "Poppins", sans-serif;
+        left: 200px;
+    }
+
+    .botao {
+        position: relative;
+        z-index: 160;
+        background-color: green;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        width: 120px;
+        height: 50px;
+        left: 200px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        top: -700px;
+    }
+
+    .botao:active {
+        transform: scale(0.9);
+    }
+
+    .img {
+        position: relative;
+        z-index: 190;
+        left: 700px;
+        width: 770px;
+        top: -490px;
+    }
+
+    .fundo {
+        position: relative;
+        z-index: 2;
+        top: -1250px;
+    }
+
+    /* --- MEDIA QUERY: AJUSTES SOMENTE PARA TELAS MENORES (CELULAR) --- */
+    @media (max-width: 768px) {
+        .h1, .med, .dig, p, .botao {
+            left: 0 !important;
             text-align: center;
         }
 
         .h1 {
-            position: relative;
-            z-index: 100;
-            color: rgb(18, 18, 95);
-            text-align: center;
-            left: 0;
-        }
-
-        h2 {
-            font-family: "Montserrat", sans-serif;
-            font-weight: 600;
-            font-size: 80px;
+            font-size: 30px;
         }
 
         .med, .dig {
-            font-family: "Rubik", sans-serif;
-            font-size: 100px;
-            color: rgb(18, 18, 95);
-            text-align: center;
-            position: relative;
-            left: 0;
+            font-size: 50px;
+            top: 0;
         }
 
         p {
-            font-family: "Poppins", sans-serif;
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
+            font-size: 16px;
         }
 
         .botao {
-            background-color: green;
-            border: none;
-            border-radius: 20px;
-            color: white;
-            width: 120px;
-            height: 50px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: block;
-            margin: 20px auto;
             top: 0;
-            position: relative;
-            z-index: 160;
-        }
-
-        .botao:active {
-            transform: scale(0.9);
+            margin: 20px auto;
+            display: block;
         }
 
         .img {
             width: 100%;
-            max-width: 400px;
+            max-width: 300px;
+            left: 0;
+            top: 0;
             display: block;
             margin: 0 auto;
-            position: relative;
-            z-index: 190;
         }
 
         .fundo {
             width: 100%;
             height: auto;
-            display: block;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            top: -100px;
+            top: -50px;
         }
-
-        /* Responsividade para celular */
-        @media (max-width: 768px) {
-            h2.med, h2.dig {
-                font-size: 50px;
-            }
-
-            .h1 {
-                font-size: 30px;
-                margin-top: 10px;
-            }
-
-            p {
-                font-size: 16px;
-                margin-top: 10px;
-                padding: 0 10px;
-            }
-
-            .botao {
-                width: 100px;
-                height: 40px;
-                font-size: 14px;
-            }
-
-            .img {
-                max-width: 300px;
-                top: -30px;
-            }
-
-            .fundo {
-                top: -50px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header></header>
-    <main>
-        <h1 class="h1"><em>Smart Med</em></h1>
-        <h2 class="dig"><em>Diagnóstico</em> </h2>
-        <h2 class="med"><em>Médico</em></h2>
-        <p>Faça já seu diagnóstico na melhor clínica do Integração!<br>Se diagnóstique!</p>
-        <button class="botao" onclick="dig()">Diagnósticos</button>
-        <img src="Medico-removebg-preview (2).png" alt="Médico" class="img">
-        <img src="Untitled design (5).png" alt="Fundo" class="fundo">
-    </main>
-    <script>
-        function dig() {
-            window.location.href = "dig.html";
-        }
-    </script>
-</body>
-</html>
+    }
+</style>
