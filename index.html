@@ -26,7 +26,18 @@
     }
 
     main {
-      padding-left: 200px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0 40px; /* diminui um pouco para ficar mais pra esquerda */
+      gap: 20px; /* espaço entre conteúdo e imagem */
+      max-width: 1200px;
+      margin: 0 auto; /* centraliza o main na tela */
+    }
+
+    .conteudo-esquerda {
+      flex: 1;
+      max-width: 600px;
     }
 
     .h1 {
@@ -52,7 +63,7 @@
 
     p {
       font-size: 18px;
-      max-width: 400px;
+      max-width: 100%;
       margin-bottom: 30px;
     }
 
@@ -73,12 +84,11 @@
     }
 
     .img {
-      width: 770px;
-      max-width: 90%;
-      position: absolute;
-      right: 0;
-      top: 180px;
-      z-index: 10;
+      width: 900px;       /* imagem maior */
+      max-width: 80vw;    /* até 80% da largura da tela */
+      height: auto;
+      margin-left: 0;     /* sem margem para a esquerda */
+      user-select: none;
     }
 
     .fundo {
@@ -92,15 +102,33 @@
       user-select: none;
     }
 
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      main {
+        padding: 0 20px;
+        gap: 15px;
+      }
+      .img {
+        width: 600px;
+        max-width: 70vw;
+      }
+      .h1 {
+        font-size: 36px;
+      }
+      .dig, .med {
+        font-size: 70px;
+      }
+    }
+
     @media (max-width: 768px) {
       main {
+        flex-direction: column;
         padding: 0 20px;
         text-align: center;
       }
 
       .h1 {
         font-size: 28px;
-        margin-left: 0;
       }
 
       .dig,
@@ -124,12 +152,13 @@
       }
 
       .img {
-        position: static;
-        width: 80vw;
-        max-width: 320px;
+        position: relative;
+        width: 85vw;
+        max-width: 340px;
         height: auto;
-        margin: 30px auto;
+        margin: 30px auto 0 auto;
         display: block;
+        
       }
 
       .fundo {
@@ -141,15 +170,17 @@
 <body>
   <header></header>
   <main>
-    <h1 class="h1"><em>Smart Med</em></h1>
-    <h2 class="dig"><em>Diagnóstico</em></h2>
-    <h2 class="med"><em>Médico</em></h2>
-    <p>
-      Faça já seu diagnóstico na melhor clínica do Integração!<br />
-      Se diagnóstique!
-    </p>
-    <button class="botao" onclick="dig()">Diagnósticos</button>
-    <img src="Medico-removebg-preview (2).png" alt="Médico" class="img" />
+    <div class="conteudo-esquerda">
+      <h1 class="h1"><em>Smart Med</em></h1>
+      <h2 class="dig"><em>Diagnóstico</em></h2>
+      <h2 class="med"><em>Médico</em></h2>
+      <p>
+        Faça já seu diagnóstico na melhor clínica do Integração!<br />
+        Se diagnóstique!
+      </p>
+      <button class="botao" onclick="dig()">Diagnósticos</button>
+    </div>
+    <img src="Medico-removebg-preview (2).png" alt="Médico" class="img" draggable="false" />
     <img
       src="Untitled design (5).png"
       alt="Fundo"
