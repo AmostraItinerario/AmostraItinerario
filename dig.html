@@ -322,7 +322,7 @@
         }
 
        function updateTeaSuggestions() {
-            teaList.innerHTML = ''; // Limpa a lista anterior
+            teaList.innerHTML = ''; 
 
             if (selectedSymptoms.size === 0) {
                 teaList.innerHTML = '<li>Nenhum chá sugerido ainda. Selecione seus sintomas acima!</li>';
@@ -344,7 +344,7 @@
                     }
                 });
 
-                // Se nenhum chá foi sugerido para os sintomas selecionados (ex: sintoma novo sem chá mapeado)
+               
                 if (teaList.children.length === 0) {
                      teaList.innerHTML = '<li>Nenhum chá específico encontrado para esta combinação de sintomas.</li>';
                 }
@@ -353,7 +353,7 @@
             }
         }
 
-        // Inicializa a exibição de chás
+        
         updateTeaSuggestions();
     </script>
 </body>
